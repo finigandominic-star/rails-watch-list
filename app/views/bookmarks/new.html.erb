@@ -1,0 +1,14 @@
+<div class="banner text-white py-5 mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://griffithobservatory.lacity.gov/wp-content/uploads/2021/12/cameron-venti-6QDvwq2Fjsc-unsplash-scaled.jpg'); background-size: cover; background-position: center;">
+  <div class="container text-center py-4">
+  <h1>Add a movie to <%= @list.name %></h1>
+
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.association :movie, prompt: "Select a movie" %>
+    <%= f.input :comment, placeholder: "Enter a comment about this movie" %>
+    <%= f.submit "Add movie", class: "btn btn-primary" %>
+  <% end %>
+
+  <br>
+  <%= link_to "Back to list", list_path(@list) %>
+</div>
+</div>

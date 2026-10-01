@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_01_101444) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_01_132929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_101444) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -41,5 +42,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_101444) do
   end
 
   add_foreign_key "bookmarks", "lists"
-  add_foreign_key "bookmarks", "movies"
+  add_foreign_key "bookmarks", "movies", on_delete: :restrict
 end

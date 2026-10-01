@@ -1,0 +1,21 @@
+<div class="banner text-white py-5 mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://griffithobservatory.lacity.gov/wp-content/uploads/2021/12/cameron-venti-6QDvwq2Fjsc-unsplash-scaled.jpg'); background-size: cover; background-position: center;">
+  <div class="container text-center py-5">
+    <h1 class="fw-bold display-4">Movies, Movies, Movies!</h1>
+    <p class="fs-5 text-white-50">We all love Movies!</p>
+
+    <!-- Action Button inside the banner -->
+    <%= link_to "Create a New List", new_list_path, class: "btn btn-outline-light btn-lg mt-3 shadow-sm px-4" %>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <h2 class="mb-4">My Lists</h2>
+
+  <% @lists.each do |list| %>
+    <% bg_image = list.image_url.presence || "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop" %>
+
+    <div class="card-category mb-3" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= bg_image.to_s.gsub('"', '') %>');">
+      <%= link_to list.name, list_path(list), class: "text-white text-decoration-none fw-bold fs-3" %>
+    </div>
+  <% end %>
+</div>

@@ -7,3 +7,29 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require "json"
+require "rest-client"
+
+puts "Cleaning database..."
+Movie.destroy_all
+
+(1..5).each do |page|
+  puts "Importing movies from page #{page}..."
+
+url = "https://tmdb.lewagon.com/movie/top_rated?page=#{page}"
+response = RestClient.get(url)
+data = JSON.parse(response)
+# => repos is an `Array` of `Hashes`.
+movies = data["results"]
+movies.each do |movie_data|
+  Movie.create!(
+  title: movie_data["title"],
+  overview: movie_data["overview"],
+  poster_url: movie_data["poster_path"],
+  rating: movie_data["vote_average"]
+  )
+end
+end
+
+puts "Created #{Movie.count} movies!"

@@ -1,0 +1,44 @@
+<%# Cinematic Hero Banner for the List Show Page %>
+<% show_bg = @list.image_url.presence || "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop" %>
+
+<div class="banner text-white py-5 mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= show_bg.to_s.gsub('"', '') %>'); background-size: cover; background-position: center;">
+  <div class="container text-center py-4">
+    <h1 class="fw-bold display-4 text-white"><%= @list.name %></h1>
+    <p class="text-white-50">Curated collection of cinematic picks</p>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <h3 class="text-light fs-4 mb-4">Movies in this list</h3>
+
+  <div class="bookmarks-list">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="card-product mb-3 shadow-sm">
+        <!-- FIXED: Prepended TMDB base URL so posters render correctly -->
+        <img src="https://image.tmdb.org/t/p/w500<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" />
+
+        <div class="card-product-infos">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold text-white mb-1"><%= bookmark.movie.title %></h5>
+            <span class="badge bg-secondary text-light">⭐ <%= bookmark.movie.rating %></span>
+          </div>
+
+          <!-- Muted text so it's readable against the dark background -->
+          <p class="text-white-50 small mb-1"><em>"<%= bookmark.comment %>"</em></p>
+          <p class="text-muted small mb-2"><%= bookmark.movie.overview %></p>
+
+          <%= link_to "delete", list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this movie?" }, class: "text-danger small text-decoration-none fw-bold" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="mt-4 d-flex gap-2 align-items-center">
+  <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-outline-light btn-sm px-3" %>
+  <%= link_to "Back to all lists", lists_path, class: "btn btn-outline-secondary btn-sm px-3" %>
+
+  <!-- Delete List Button -->
+  <%= link_to "Delete" , list_path(@list), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this entire list?" }, class: "btn btn-outline-danger btn-sm px-3 ms-auto" %>
+</div>
+</div>

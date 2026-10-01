@@ -1,0 +1,25 @@
+
+  <div class="container text-center py-4" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://griffithobservatory.lacity.gov/wp-content/uploads/2021/12/cameron-venti-6QDvwq2Fjsc-unsplash-scaled.jpg'); background-size: cover; background-position: center;">
+    <h1 class="fw-bold display-4 text-white">New List</h1>
+
+
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <!-- Dark card container for the form -->
+      <div class="card bg-dark text-white p-4 shadow-sm border-secondary">
+        <%= simple_form_for(@list) do |f| %>
+          <%= f.input :name, label: "List Name", input_html: { class: "bg-dark text-white border-secondary" } %>
+          <%= f.input :image_url, label: "Image URL", placeholder: "Paste a link to an image (e.g., https://...)", input_html: { class: "bg-dark text-white border-secondary" } %>
+
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <%= f.submit "Create List", class: "btn btn-outline-light px-4" %>
+            <%= link_to "Back to lists", lists_path, class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+ </div>
